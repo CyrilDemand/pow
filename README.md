@@ -14,6 +14,10 @@
 * **nodeExists** (address) => boolean
   Fetches in the nodes array if the provided node already exists and returns this information
 
+## partie 1
+
+vidéo dans le projet (2025-02-08 14-00-25.mp4)
+## partie 2
 Absence de calcul cryptographique sécurisé :
 Le Proof of Work est basé sur une simple opération mathématique entre l’adresse du sender et du receiver (generateIntegerFromAddress).
 
