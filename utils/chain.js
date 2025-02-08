@@ -1,5 +1,5 @@
 var validatorUtilities = require('./validator');
-
+const validator = require("./validator");
 var ChainUtilities = function ChainUtilities(){
 
   var self = this;
@@ -9,12 +9,20 @@ var ChainUtilities = function ChainUtilities(){
   function isValidChain(chain){
     if(chain.length>0){
       for (var i = 1; i < chain.length; i++) {
-        var lastBlockHash = calculateHash(chain[i-1]);
+        var lastBlockHash = validatorUtilities.calculateHash(chain[i-1].transaction[0]);
         if(lastBlockHash !== chain[i].previousHash){
+            console.log("1er if")
           return false;
         }
-        if(validatorUtilities.generateProof(chain[i]) !== chain[i].proof){
+        if(validatorUtilities.generateProof(chain[i].transaction[0]) !== chain[i].proof){
+            console.log("2e if")
           return false;
+        }
+        if (chain[i].index === undefined || chain[i].timestamp === undefined ||
+            chain[i].transaction === undefined || chain[i].transaction === [] ||
+            chain[i].proof === undefined || chain[i].previousHash === undefined){
+            console.log("3e if")
+            return false
         }
       }
     }

@@ -1,7 +1,7 @@
 var addressUtilities = require('../utils/address');
 var arrayUtilities = require('../utils/array');
 var validator = require('../utils/validator');
-
+var chainUtilities = require('../utils/chain')
 var blockchain = function blockchain(){
 
   var self = this;
@@ -22,7 +22,11 @@ var blockchain = function blockchain(){
     *  an empty transactions list and creating the first block
     */
     self.chain = [];
-    self.currentTransactions = [];
+    self.currentTransactions = [ {
+      "sender": 0,
+      "receiver": "localhost:9999",
+      "amount": 1
+    }];
     self.newBlock(100, 1);
   }
 
@@ -77,7 +81,13 @@ var blockchain = function blockchain(){
   }
 
   function checkChain(){
-    
+      let chain = getChain()
+      let isValid = chainUtilities.isValidChain(chain);
+      if (isValid){
+        return chain;
+      }else{
+        return []
+      }
   }
 
 

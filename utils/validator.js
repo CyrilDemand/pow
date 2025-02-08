@@ -6,10 +6,11 @@ var ValidatorHandler = function ValidatorHandler(){
   this.generateProof = generateProof;
 
   function calculateHash(transaction){
-    if(!transaction || transaction.sender === undefined || transaction.receiver === undefined){
+    console.log(transaction)
+    if(transaction===undefined || !transaction || transaction.sender === undefined || transaction.receiver === undefined){
       return false;
     }
-    return generateHashFromString(transaction.sender)+"-"+generateHashFromString(transaction.receiver)+"-0"+(new Date().getTime().toString(16));
+    return generateHashFromString(transaction.sender)+"-"+generateHashFromString(transaction.receiver);
   }
 
   function generateProof(transaction){
